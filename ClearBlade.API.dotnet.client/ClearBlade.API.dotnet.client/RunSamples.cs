@@ -97,7 +97,7 @@ namespace ClearBlade.API.dotnet.client
                 if (bGetDevicesList)
                 {
                     logger.LogInformation("Obtain list of devices for a particular registry");
-                    var result = await mClient.GetDevicesList(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", null);
+                    var result = await mClient.GetDevicesList(4, "projects/{project_id}/locations/asia-east1/registries/{registry_id}", null);
                     if (!result.Item1)
                         logger.LogError("Failed to get list of devices");
                     else
@@ -120,7 +120,7 @@ namespace ClearBlade.API.dotnet.client
                         subfolder = "sub" - optional*/
                     };
 
-                    var result = await mClient.SendCommandToDevice(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device", data);
+                    var result = await mClient.SendCommandToDevice(4, "projects/{project_id}/locations/asia-east1/registries/{registry_id}/devices/testing_device", data);
                     if (!result)
                         logger.LogError("Failed to send command to device");
                     else
@@ -136,9 +136,9 @@ namespace ClearBlade.API.dotnet.client
                     var data = new
                     {
                         binaryData = "QUJD",
-                        versionToUpdate = "19"
+                        versionToUpdate = "14"
                     };
-                    var result = await mClient.ModifyCloudToDeviceConfig(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device", data);
+                    var result = await mClient.ModifyCloudToDeviceConfig(4, "projects/{project_id}/locations/asia-east1/registries/{registry_id}/devices/testing_device", data);
                     if (!result)
                         logger.LogError("Failed to modify the device config data");
                     else
@@ -153,7 +153,7 @@ namespace ClearBlade.API.dotnet.client
                     logger.LogInformation("Create a new device");
 
                     string id = "Sample-New-Device";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     var result = await mClient.CreateDevice(4, id, name, null, null);
                     if (!result.Item1 || (result.Item2 == null))
@@ -171,8 +171,8 @@ namespace ClearBlade.API.dotnet.client
                 {
                     logger.LogInformation("Delete a device");
 
-                    string id = "Sample-New-Device";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string id = "SampleDotNetDeviceSeven";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/{registry_id}/devices/SampleDotNetDeviceSeven";
 
                     var result = await mClient.DeleteDevice(4, id, name);
                     if (!result.Item1 || (result.Item2 == null))
@@ -188,7 +188,7 @@ namespace ClearBlade.API.dotnet.client
                 {
                     logger.LogInformation("Get a device");
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/{registry_id}/devices/testing_device";
 
                     var result = await mClient.GetDevice(4, name);
                     if (!result.Item1 || (result.Item2 == null))
@@ -207,7 +207,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, device with name
                     // "Sample-New-Device" exists and version is updated to "2"
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/{registry_id}/devices/testing_device";
                     string localVersion = "2";
 
                     var result = await mClient.GetDeviceConfig(4, name, localVersion);
@@ -231,7 +231,7 @@ namespace ClearBlade.API.dotnet.client
                     // "Sample-New-Registry" is the registry name
 
                     // Sample - Bind Device
-                    var result = await mClient.BindDeviceToGateway(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
+                    var result = await mClient.BindDeviceToGateway(4, "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
                     if (!result)
                     {
                         logger.LogError("Failed To Bind Device");
@@ -239,7 +239,7 @@ namespace ClearBlade.API.dotnet.client
                     else
                     {
                         // Actual test - UnBind Device
-                        result = await mClient.UnBindDeviceFromGateway(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
+                        result = await mClient.UnBindDeviceFromGateway(4, "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
                         if (!result)
                             logger.LogError("Failed to unbind a device");
                         else
@@ -256,7 +256,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, registry with name
                     // "Sample-New-Registry" exists and version is updated to "2"
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry";
 
                     var result = await mClient.GetRegistryConfig(4, name);
                     if (!result.Item1 || (result.Item2 == null))
@@ -277,7 +277,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, registry with name
                     // "Sample-New-Registry" exists
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/{registry_id}";
 
                     var result = await mClient.GetRegistryConfig(4, name);
                     if (!result.Item1 || (result.Item2 == null))
@@ -298,7 +298,7 @@ namespace ClearBlade.API.dotnet.client
                         result.Item2.MqttConfig.MqttEnabledState = "MQTT_ENABLED";
                         result.Item2.HttpConfig.HttpEnabledState = "HTTP_ENABLED";
 
-                        result = await mClient.PatchRegistry(4, name, updateMask, result.Item2);
+                        result = await mClient.PatchRegistry(4, result.Item2.Id, updateMask, result.Item2);
 
                         if (!result.Item1 || (result.Item2 == null))
                             logger.LogError("Failed to update a registry configuration");
@@ -313,7 +313,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, device with name
                     // "Sample-New-Device" exists
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     var result = await mClient.GetDevice(4, name);
                     if (!result.Item1 || (result.Item2 == null))
@@ -350,7 +350,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, device with name
                     // "Sample-New-Device" exists
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     var result = await mClient.GetDeviceConfigVersionList(4, name, 5);
                     if (!result.Item1 || (result.Item2 == null))
@@ -371,7 +371,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, device with name
                     // "Sample-New-Device" exists
 
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     var result = await mClient.GetDeviceStateList(4, name, 5);
                     if (!result.Item1 || (result.Item2 == null))
@@ -392,7 +392,7 @@ namespace ClearBlade.API.dotnet.client
                     logger.LogInformation("Create a new device with RSA credentials");
 
                     string id = "Sample-New-Device";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     String keyText = File.ReadAllText("path/to/key");
 
@@ -425,7 +425,7 @@ namespace ClearBlade.API.dotnet.client
                     logger.LogInformation("Create a new device with EC credentials");
 
                     string id = "Sample-New-Device";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     String keyText = File.ReadAllText("path/to/key");
 
@@ -461,7 +461,7 @@ namespace ClearBlade.API.dotnet.client
                     string name = "Sample-New-Registry-2";
                     string pubsubTopic = "projects/developmentenv/topics/pubsubTopic";
 
-                    RegistryConfigModel registryConfigModel = new RegistryConfigModel()
+                    CreateRegistryModel registryConfigModel = new CreateRegistryModel()
                     {
                         Id = name,
                     };
@@ -492,7 +492,7 @@ namespace ClearBlade.API.dotnet.client
                     // While running this sample, it is assumed that, registry with name
                     // "Sample-New-Registry-2" exists
 
-                    string name = "Sample-New-Registry-2";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry-2";
 
                     var result = await mClient.DeleteRegistry(4, name);
                     if (!result)
@@ -515,7 +515,7 @@ namespace ClearBlade.API.dotnet.client
                     {
                         AssociationsGatewayId = "associated-gateway",
                     };
-                    var result = await mClient.GetDevicesList(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", gatewayListOptions);
+                    var result = await mClient.GetDevicesList(4, "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry", gatewayListOptions);
                     if (!result.Item1)
                         logger.LogError("Failed to get list of devices");
                     else
@@ -536,7 +536,7 @@ namespace ClearBlade.API.dotnet.client
                         GatewayType = core.Enums.GatewayTypeEnum.GATEWAY,
                     };
 
-                    var result = await mClient.GetDevicesList(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", gatewayListOptions);
+                    var result = await mClient.GetDevicesList(4, "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry", gatewayListOptions);
                     if (!result.Item1)
                         logger.LogError("Failed to get list of devices");
                     else
@@ -552,7 +552,7 @@ namespace ClearBlade.API.dotnet.client
                 {
                     logger.LogInformation("Unbind the device");
 
-                    var unbindResult = await mClient.UnBindDeviceFromGateway(4, "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
+                    var unbindResult = await mClient.UnBindDeviceFromGateway(4, "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry", "TestGateway", "Sample-New-Device");
                     if (!unbindResult)
                         logger.LogError("Failed to unbind a device");
                     else
@@ -561,7 +561,7 @@ namespace ClearBlade.API.dotnet.client
                     logger.LogInformation("Delete the device");
 
                     string id = "Sample-New-Device";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Device";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Device";
 
                     var deleteResult = await mClient.DeleteDevice(4, id, name);
                     if (!deleteResult.Item1 || (deleteResult.Item2 == null))
@@ -578,7 +578,7 @@ namespace ClearBlade.API.dotnet.client
                     logger.LogInformation("Create a new gateway");
 
                     string id = "Sample-New-Gateway";
-                    string name = "projects/developmentenv/locations/us-central1/registries/Sample-New-Registry/Devices/Sample-New-Gateway";
+                    string name = "projects/{project_id}/locations/asia-east1/registries/Sample-New-Registry/devices/Sample-New-Gateway";
 
                     String keyText = File.ReadAllText("path/to/key");
 

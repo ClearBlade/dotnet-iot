@@ -27,7 +27,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
- 
+
+using ClearBlade.API.dotnet.client.core.Enums;
+
 namespace ClearBlade.API.dotnet.client.core.Models
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
@@ -146,18 +148,19 @@ namespace ClearBlade.API.dotnet.client.core.Models
         {
             LastAccessedGatewayId = string.Empty;
             LastAccessedGatewayTime = string.Empty;
-            GatewayType = string.Empty;
-            GatewayAuthMethod = string.Empty;
+            GatewayAuthMethod = GatewayTypeEnum.GATEWAY_AUTH_METHOD_UNSPECIFIED.ToString();
+            GatewayType = GatewayTypeEnum.NON_GATEWAY.ToString();
         }
     }
 
     public class LastErrorStatus
     {
-        public int code { get; set; }
+        public object code { get; set; }
         public string message { get; set; }
 
         public LastErrorStatus()
         {
+            code = -1;
             message = string.Empty;
         }
     }
