@@ -30,6 +30,7 @@
  
 using ClearBlade.API.dotnet.client.core.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Refit;
 
 namespace ClearBlade.API.dotnet.client.core.Services
@@ -145,11 +146,14 @@ namespace ClearBlade.API.dotnet.client.core.Services
                 _logger.LogInformation("Getting devices list for parent {parentPath}.", parentPath);
                 if (_api == null)
                     return (false, new List<DeviceModel>());
-                var response = await _api.GetDevicesList(version, rkm.SystemKey, parentPath, gatewayOptions);
+
+                var response = await _api.GetDevicesList(version, rkm.SystemKey, parentPath, gatewayOptions != null ? gatewayOptions.GatewayType.ToString() : null, gatewayOptions != null ? gatewayOptions.AssociationsGatewayId : null, gatewayOptions != null ? gatewayOptions.AssociationsDeviceId : null, 50);
                 if (response.IsSuccessStatusCode && response.Content != null)
                 {
-                    _logger.LogInformation("Found {y} devices", response.Content.Devices.Count);
-                    return (true, response.Content.Devices);
+                    string content = response.Content.ToString();
+                    DeviceCollection deviceCollection = JsonConvert.DeserializeObject<DeviceCollection>(content);
+                    _logger.LogInformation("Found {y} devices", deviceCollection.Devices.Count);
+                    return (true, deviceCollection.Devices);
                 }
                 _logger.LogError(response.Error, "Reason: {ReasonPhrase}, Error {error}", response.ReasonPhrase, (response.Error == null) ? "" : response.Error.Content);
                 return (false, new List<DeviceModel>());
@@ -269,7 +273,7 @@ namespace ClearBlade.API.dotnet.client.core.Services
                 _logger.LogInformation("Deleting device with id {id}.", deviceIn.Id);
                 if (_api == null)
                     return (false, null);
-                var response = await _api.DeleteDevice(version, rkm.SystemKey, deviceIn.Name, deviceIn);
+                var response = await _api.DeleteDevice(version, rkm.SystemKey, deviceIn.Id, deviceIn);
                 if (response.IsSuccessStatusCode)
                 {
                     _logger.LogInformation("Successfully deleted the device");

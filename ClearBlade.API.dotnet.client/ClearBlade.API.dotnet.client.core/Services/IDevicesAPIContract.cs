@@ -43,7 +43,11 @@ namespace ClearBlade.API.dotnet.client.core.Services
         /// <param name="parentPath"></param>
         /// <returns>An object which contains list of device model objects</returns>
         [Get("/api/v/{version}/webhook/execute/{system_key}/cloudiot_devices")]
-        Task<IApiResponse<DeviceCollection>> GetDevicesList(int version, string system_key, [AliasAs("parent")] string parentPath, [AliasAs("gatewayListOptions")] GatewayListOptionsModel? gatewayOptions);
+        Task<IApiResponse<string>> GetDevicesList(int version, string system_key, [AliasAs("parent")] string parentPath,
+            [AliasAs("gatewayListOptions.gatewayType")] string gatewayType,
+            [AliasAs("gatewayListOptions.associationsGatewayId")] string associationsGatewayId,
+            [AliasAs("gatewayListOptions.associationsDeviceId")] string associationsDeviceId,
+            [AliasAs("pageSize")] int pageSize); // Include pageSize as a query parameter);
 
         /// <summary>
         /// A generic api to post any command related to Devices

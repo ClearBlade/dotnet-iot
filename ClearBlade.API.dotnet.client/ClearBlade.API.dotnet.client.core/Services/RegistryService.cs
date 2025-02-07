@@ -35,7 +35,7 @@ using Refit;
 
 namespace ClearBlade.API.dotnet.client.core.Services
 {
-    internal class RegistryService : IRegistryService
+    public class RegistryService : IRegistryService
     {
         private readonly ILogger<RegistryService> _logger;
         private IRegistryServiceContract? _api;
@@ -98,7 +98,7 @@ namespace ClearBlade.API.dotnet.client.core.Services
         /// </summary>
         /// <param name="registry"></param>
         /// <returns>Success / Failure</returns>
-        public async Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, RegistryConfigModel registryConfigModel)
+        public async Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, CreateRegistryModel registryConfigModel)
         {
             _logger.LogInformation("Creating registry {registryConfigModel}.", registryConfigModel);
 

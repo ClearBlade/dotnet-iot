@@ -68,9 +68,12 @@ namespace ClearBlade.API.dotnet.client.core.Models
     {
         public string PubsubTopicName { get; set; }
 
+        public string SubfolderMatches { get; set; }
+
         public EventNotificationConfig()
         {
             PubsubTopicName = string.Empty;
+            SubfolderMatches = string.Empty;
         }
     }
 

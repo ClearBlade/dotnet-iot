@@ -132,7 +132,6 @@ namespace ClearBlade.API.dotnet.client.core
 
             DeviceCreateModel model = new DeviceCreateModel();
             model.Id = deviceIdIn;
-            model.Name = deviceNameIn;
             model.Credentials = credentials ?? model.Credentials;
             model.GatewayConfig = gatewayConfig ?? model.GatewayConfig;
 
@@ -157,7 +156,6 @@ namespace ClearBlade.API.dotnet.client.core
 
             DeviceCreateModel model = new DeviceCreateModel();
             model.Id = deviceIdIn;
-            model.Name = deviceNameIn;
 
             return await _deviceSvc.DeleteDevice(version, model);
         }
@@ -318,7 +316,7 @@ namespace ClearBlade.API.dotnet.client.core
         /// <param name="parentPath"></param>
         /// <param name="registryConfigModel"></param>
         /// <returns></returns>
-        public async Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, RegistryConfigModel registryConfigModel)
+        public async Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, CreateRegistryModel registryConfigModel)
         {
             // Initialize the service
             if (!_registrySvc.Initialize())

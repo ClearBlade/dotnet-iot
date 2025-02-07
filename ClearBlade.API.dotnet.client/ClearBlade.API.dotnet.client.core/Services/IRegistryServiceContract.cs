@@ -48,7 +48,7 @@ namespace ClearBlade.API.dotnet.client.core.Services
         /// <param name="parentPath"></param>
         /// <returns>RegistryKeyModel</returns>
         [Post("/api/v/{version}/webhook/execute/{system_key}/cloudiot")]
-        Task<IApiResponse<RegistryConfigModel>> CreateRegistry(int version, string system_key, [AliasAs("parent")] string parentPath, [Body] RegistryConfigModel registryIn);
+        Task<IApiResponse<RegistryConfigModel>> CreateRegistry(int version, string system_key, [AliasAs("parent")] string parentPath, [Body] CreateRegistryModel registryIn);
 
         /// <summary>
         /// Api to get registry credentials using the service account credentials

@@ -60,6 +60,7 @@ public class Program
         //we will configure logging here
         services.AddLogging(configure => configure.AddConsole())
                 .AddSingleton<IDeviceService, DeviceService>()
+                .AddSingleton<IRegistryService, RegistryService>()
                 .AddSingleton<IAdminService, AdminService>();
     }
 }

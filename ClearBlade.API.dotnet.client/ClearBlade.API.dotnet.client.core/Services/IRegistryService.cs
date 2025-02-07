@@ -48,7 +48,7 @@ namespace ClearBlade.API.dotnet.client.core.Services
         /// <param name="parentPath"></param>
         /// <param name="registryConfigModel"></param>
         /// <returns>RegistryConfigModel</returns>
-        Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, RegistryConfigModel registryConfigModel);
+        Task<(bool, RegistryConfigModel?)> CreateRegistry(int version, string parentPath, CreateRegistryModel registryConfigModel);
 
         /// <summary>
         /// Api to delete a registry
