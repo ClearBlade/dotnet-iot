@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- NuGet metadata -->
+    <PackageId>ClearBlade.API.dotnet.client.core</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>ClearBlade</Authors>
+    <Company>ClearBlade</Company>
+    <Description>.NET SDK for accessing the ClearBlade API</Description>
+    <PackageTags>ClearBlade;IoT;API;SDK;dotnet</PackageTags>
+    <RepositoryUrl>https://github.com/ClearBlade/ClearBlade.API.dotnet.client.core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Or SPDX identifier of your license -->
   </PropertyGroup>
 
   <ItemGroup>
