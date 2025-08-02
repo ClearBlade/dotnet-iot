@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/ClearBlade/ClearBlade.API.dotnet.client.core</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression> <!-- Or SPDX identifier of your license -->
+    <PackageLicenseExpression>Apache</PackageLicenseExpression> <!-- Or SPDX identifier of your license -->
 
   </PropertyGroup>
 
