@@ -4,6 +4,19 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- NuGet metadata -->
+    <PackageId>ClearBlade.API.dotnet.client.core</PackageId>
+    <Version>1.0.3</Version>
+    <Authors>ClearBlade</Authors>
+    <Company>ClearBlade</Company>
+    <Description>.NET SDK for accessing the ClearBlade API</Description>
+    <PackageTags>ClearBlade;IoT;API;SDK;dotnet</PackageTags>
+    <RepositoryUrl>https://github.com/ClearBlade/ClearBlade.API.dotnet.client.core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression> <!-- Or SPDX identifier of your license -->
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +24,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Refit" Version="6.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
